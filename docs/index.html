@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolPro API Documentation</title>
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #4CAF50;
+            --text-color: #f1f1f1;
+            --text-muted: #aaaaaa;
+            --warning-banner: #d32f2f;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .warning-banner {
+            background-color: var(--warning-banner);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin: 0;
+        }
+        
+        .api-description {
+            color: var(--text-muted);
+            margin: 10px 0;
+        }
+        
+        .endpoint {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .method {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        
+        .get { background-color: #2E7D32; }
+        .post { background-color: #1565C0; }
+        .put { background-color: #EF6C00; }
+        .delete { background-color: #C62828; }
+        
+        .path {
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+        
+        .endpoint-description {
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-top: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            color: var(--text-color);
+        }
+        
+        code {
+            background-color: #333;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        pre {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .parameter {
+            margin-bottom: 10px;
+        }
+        
+        .parameter-name {
+            font-weight: bold;
+            font-family: monospace;
+        }
+        
+        .parameter-type {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .parameter-required {
+            color: #ff5252;
+            font-size: 0.9em;
+        }
+        
+        .tab {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        
+        .response-schema {
+            margin-top: 15px;
+        }
+        
+        .base-url {
+            background-color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        API IS CURRENTLY NOT OUT.
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>CoolPro API Documentation</h1>
+            <p class="api-description">
+                Documentation for CoolPro API. Currently in development and open access (no API key required).
+            </p>
+            <div class="base-url">
+                Base URL: https://coolpro1.xyz
+            </div>
+        </header>
+        
+        <section id="authentication">
+            <h2>Connect</h2>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="path">/v2/connect</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Establish a connection with the API.</p>
+                </div>
+                
+                <h3>Request Body</h3>
+                <div class="parameter">
+                    <span class="parameter-name">username</span>
+                    <span class="parameter-type">string</span>
+                    <span class="parameter-required">required</span>
+                    <p>Your username</p>
+                </div>
+                
+                <div class="parameter">
+                    <span class="parameter-name">password</span>
+                    <span class="parameter-type">string</span>
+                    <span class="parameter-required">required</span>
+                    <p>Your password</p>
+                </div>
+                
+                <h3>Example Request</h3>
+                <pre><code>curl -X POST \
+  https://coolpro1.xyz/v2/connect \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "username": "your_username",
+    "password": "your_password"
+  }'</code></pre>
+                
+                <h3>Response</h3>
+                <div class="response-schema">
+                    <pre><code>{
+  "status": "connected",
+  "session_id": "sess_abc123def456",
+  "user_id": 12345,
+  "expires_at": "2023-12-31T23:59:59Z"
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section id="items">
+            <h2>Items</h2>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="path">/v2/grant-item</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Grant an item to a user account.</p>
+                </div>
+                
+                <h3>Request Body</h3>
+                <div class="parameter">
+                    <span class="parameter-name">user_id</span>
+                    <span class="parameter-type">integer</span>
+                    <span class="parameter-required">required</span>
+                    <p>ID of the user receiving the item</p>
+                </div>
+                
+                <div class="parameter">
+                    <span class="parameter-name">item_code</span>
+                    <span class="parameter-type">string</span>
+                    <span class="parameter-required">required</span>
+                    <p>Unique identifier for the item</p>
+                </div>
+                
+                <div class="parameter">
+                    <span class="parameter-name">quantity</span>
+                    <span class="parameter-type">integer</span>
+                    <span class="parameter-required">optional</span>
+                    <p>Number of items to grant (default: 1)</p>
+                </div>
+                
+                <h3>Example Request</h3>
+                <pre><code>curl -X POST \
+  https://coolpro1.xyz/v2/grant-item \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "user_id": 12345,
+    "item_code": "PREMIUM_TOKEN",
+    "quantity": 5
+  }'</code></pre>
+                
+                <h3>Response</h3>
+                <div class="response-schema">
+                    <pre><code>{
+  "success": true,
+  "transaction_id": "txn_789012",
+  "items_granted": 5,
+  "new_balance": 15,
+  "timestamp": "2023-04-25T14:30:00Z"
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <section id="account">
+            <h2>Account</h2>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="path">/v2/account</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Retrieve account information.</p>
+                </div>
+                
+                <h3>Query Parameters</h3>
+                <div class="parameter">
+                    <span class="parameter-name">user_id</span>
+                    <span class="parameter-type">integer</span>
+                    <span class="parameter-required">required</span>
+                    <p>ID of the user to retrieve</p>
+                </div>
+                
+                <div class="parameter">
+                    <span class="parameter-name">details</span>
+                    <span class="parameter-type">boolean</span>
+                    <span class="parameter-required">optional</span>
+                    <p>Include detailed information (default: false)</p>
+                </div>
+                
+                <h3>Example Request</h3>
+                <pre><code>curl -X GET \
+  'https://coolpro1.xyz/v2/account?user_id=12345&details=true'</code></pre>
+                
+                <h3>Response</h3>
+                <div class="response-schema">
+                    <pre><code>{
+  "user_id": 12345,
+  "username": "cooluser",
+  "status": "active",
+  "created_at": "2023-01-01T00:00:00Z",
+  "last_login": "2023-04-25T12:34:56Z",
+  "inventory": {
+    "PREMIUM_TOKEN": 15,
+    "REGULAR_TOKEN": 42
+  },
+  "premium": true,
+  "account_balance": 99.99
+}</code></pre>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
