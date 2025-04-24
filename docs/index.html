@@ -161,12 +161,12 @@
     
     <div class="container">
         <header>
-            <h1>CoolPro API Documentation</h1>
+            <h1>korps api docs</h1>
             <p class="api-description">
-                Documentation for CoolPro API. Currently in development and open access (no API key required).
+                Documentation for Korps AC API. Currently in development and open access (no API key required).
             </p>
             <div class="base-url">
-                Base URL: https://coolpro1.xyz
+                Base URL: https://api.coolpro1.xyz
             </div>
         </header>
         
@@ -179,7 +179,7 @@
                     <span class="path">/v2/connect</span>
                 </div>
                 <div class="endpoint-description">
-                    <p>Establish a connection with the API.</p>
+                    <p>Allow user to connect AC Account. Uses saved Bearer from MongoDB</p>
                 </div>
                 
                 <h3>Request Body</h3>
@@ -188,22 +188,13 @@
                     <span class="parameter-type">string</span>
                     <span class="parameter-required">required</span>
                     <p>Your username</p>
-                </div>
-                
-                <div class="parameter">
-                    <span class="parameter-name">password</span>
-                    <span class="parameter-type">string</span>
-                    <span class="parameter-required">required</span>
-                    <p>Your password</p>
-                </div>
                 
                 <h3>Example Request</h3>
                 <pre><code>curl -X POST \
-  https://coolpro1.xyz/v2/connect \
+  https://api.coolpro1.xyz/v2/connect \
   -H 'Content-Type: application/json' \
   -d '{
-    "username": "your_username",
-    "password": "your_password"
+    "username": "your_username"
   }'</code></pre>
                 
                 <h3>Response</h3>
@@ -239,7 +230,7 @@
                 </div>
                 
                 <div class="parameter">
-                    <span class="parameter-name">item_code</span>
+                    <span class="parameter-name">item_id</span>
                     <span class="parameter-type">string</span>
                     <span class="parameter-required">required</span>
                     <p>Unique identifier for the item</p>
@@ -254,11 +245,10 @@
                 
                 <h3>Example Request</h3>
                 <pre><code>curl -X POST \
-  https://coolpro1.xyz/v2/grant-item \
+  https://api.coolpro1.xyz/v2/grant-item \
   -H 'Content-Type: application/json' \
   -d '{
-    "user_id": 12345,
-    "item_code": "PREMIUM_TOKEN",
+    "item_id": "item_id",
     "quantity": 5
   }'</code></pre>
                 
@@ -266,9 +256,8 @@
                 <div class="response-schema">
                     <pre><code>{
   "success": true,
-  "transaction_id": "txn_789012",
   "items_granted": 5,
-  "new_balance": 15,
+  "item": item_id,
   "timestamp": "2023-04-25T14:30:00Z"
 }</code></pre>
                 </div>
@@ -304,7 +293,7 @@
                 
                 <h3>Example Request</h3>
                 <pre><code>curl -X GET \
-  'https://coolpro1.xyz/v2/account?user_id=12345&details=true'</code></pre>
+  'https://api.coolpro1.xyz/v2/account?user_id=12345&details=true'</code></pre>
                 
                 <h3>Response</h3>
                 <div class="response-schema">
@@ -314,12 +303,6 @@
   "status": "active",
   "created_at": "2023-01-01T00:00:00Z",
   "last_login": "2023-04-25T12:34:56Z",
-  "inventory": {
-    "PREMIUM_TOKEN": 15,
-    "REGULAR_TOKEN": 42
-  },
-  "premium": true,
-  "account_balance": 99.99
 }</code></pre>
                 </div>
             </div>
